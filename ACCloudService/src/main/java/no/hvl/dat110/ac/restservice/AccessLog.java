@@ -16,30 +16,34 @@ public class AccessLog {
 		cid = new AtomicInteger(0);
 	}
 
-	// TODO: add an access entry to the log for the provided message and return assigned id
+	// : add an access entry to the log for the provided message and return assigned id
 	public int add(String message) {
-		
 		int id = 0;
+		
+		id = cid.incrementAndGet();
+		
+		AccessEntry msg = new AccessEntry(id, message);
+		log.put(id, msg);
 		
 		return id;
 	}
 		
-	// TODO: retrieve a specific access entry from the log
+	// : retrieve a specific access entry from the log
 	public AccessEntry get(int id) {
 		
-		return null;
-		
+		return log.get(id);
 	}
 	
-	// TODO: clear the access entry log
+	// : clear the access entry log
 	public void clear() {
-		
+		log.clear();
 	}
 	
-	// TODO: return JSON representation of the access log
+	// : return JSON representation of the access log
 	public String toJson () {
     	
-		String json = null;
+		Gson gson = new Gson();
+		String json = gson.getAdapter(ConcurrentHashMap.class).toJson(log);		
     	
     	return json;
     }
