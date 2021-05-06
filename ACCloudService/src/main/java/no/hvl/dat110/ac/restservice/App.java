@@ -48,7 +48,7 @@ public class App {
 		
 		//receive json message, status
 		//return json AccessEntry
-		post("/accessdevice/log/", (req, res) ->{
+		post("/accessdevice/log", (req, res) ->{
 			Gson gson = new Gson();
 			AccessMessage msg = gson.fromJson(req.body(), AccessMessage.class);
 			
@@ -63,11 +63,11 @@ public class App {
 			return accesslog.toJson();
 		});
 		
-		//return single result from log
-		get("/accessdevice/log/{id}", (req, res) ->{
+		// TODO: return single result from log
+		get("/accessdevice/log/:id", (req, res) ->{
 			Gson gson = new Gson();
 			
-			int id = req.attribute("id");
+			int id = Integer.parseInt(req.params("id"));
 			
 			return gson.toJson(accesslog.get(id));
 		});
@@ -92,7 +92,7 @@ public class App {
 		
 		//deletes all entries in log
 		//return the empty access log
-		delete("/accessdevice/log/", (req, res) ->{
+		delete("/accessdevice/log", (req, res) ->{
 			accesslog.clear();
 			
 			return accesslog.toJson();
