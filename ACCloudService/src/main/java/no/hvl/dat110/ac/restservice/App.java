@@ -43,7 +43,7 @@ public class App {
 		 	return gson.toJson("IoT Access Control Device");
 		});
 		
-		// TODO: implement the routes required for the access control service
+		// : implement the routes required for the access control service
 		// as per the HTTP/REST operations describined in the project description
 		
 		//receive json message, status
@@ -63,7 +63,7 @@ public class App {
 			return accesslog.toJson();
 		});
 		
-		// TODO: return single result from log
+		//return single result from log
 		get("/accessdevice/log/:id", (req, res) ->{
 			Gson gson = new Gson();
 			
