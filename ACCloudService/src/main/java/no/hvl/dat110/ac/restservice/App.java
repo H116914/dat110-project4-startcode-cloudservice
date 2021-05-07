@@ -9,6 +9,8 @@ import static spark.Spark.delete;
 
 import com.google.gson.Gson;
 
+import okhttp3.RequestBody;
+
 /**
  * Hello world!
  *
@@ -50,7 +52,8 @@ public class App {
 		//return json AccessEntry
 		post("/accessdevice/log/", (req, res) ->{
 			Gson gson = new Gson();
-			AccessMessage msg = gson.fromJson(req.body(), AccessMessage.class);
+			AccessMessage msg = gson
+					.fromJson(req.body().toString(), AccessMessage.class);
 			
 			int id = accesslog.add(msg.getMessage());
 			
